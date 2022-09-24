@@ -1,0 +1,116 @@
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+
+OrganizerScreenManager:
+
+<OrganizerScreenManager>
+    Screen:
+        name: 'finances'
+        Finances:
+            id: finances
+<Finances>
+    id: finances
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint: (1, 0.05)
+            Widget:
+                size_hint:(None, 1)
+                size: (10, self.size[1])
+            MDIconButton:
+                icon: 'menu'
+                size_hint: (1, 1)
+                pos_hint: {"center_x": .5, "center_y": .5}
+                padding: 10
+                theme_icon_color: "Custom"
+                icon_color: app.theme_cls.primary_dark
+                on_release: app.toggle_menu()
+            MDLabel:
+                id:title_text
+                text_size: self.size
+                halign: 'center'
+                text: 'Finances'
+                color: app.theme_cls.primary_dark
+                size_hint_y: 1
+                size_hint_x: 6
+                width: self.width
+                pos_hint: {"center_x": .5, "center_y": .5}
+                valign: 'center'
+            MDIconButton:
+                icon: 'menu'
+                size_hint: (1, 1)
+                pos_hint: {"center_x": .5, "center_y": .5}
+                padding: 10
+                theme_icon_color: "Custom"
+                icon_color: app.theme_cls.primary_dark
+                on_release: app.toggle_menu()
+        FloatLayout:
+            PieChart:
+                id: pie_chart
+            MDLabel:
+                id: balance_label
+                top: self.parent.height * 1.15
+                text: "Balance"
+                halign: "center"
+                color: app.theme_cls.primary_dark
+            BoxLayout:
+                id: legend
+                top: self.parent.parent.top - self.parent.height * 0.05
+        BoxLayout:
+            BoxLayout:
+                orientation: 'vertical'
+                Widget:
+                MDIconButton:
+                    icon: "plus-circle-outline"
+                    size_hint: (1, 1)
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                    padding: 10
+                    theme_icon_color: "Custom"
+                    icon_color: app.theme_cls.primary_dark
+                    on_release: finances.show_ticket(0)
+                Widget:
+            BoxLayout:
+                orientation: 'vertical'
+                id: input_field
+                pos_hint_y : None
+                pos:(self.pos[0], -self.size[1] - 10)
+                canvas.before:
+                    Color:
+                        rgba: app.theme_cls.primary_dark
+                    Line:
+                        width: 1
+                        rectangle: (self.x, self.y, self.width, self.height)
+                MDTextField:
+                    id: input_amount
+                    pos_hint: {"center_x": .5, "center_y": 0}
+                    size_hint: (0.9, None)
+                    hint_text: "Amount"
+                    theme_text_color: "Custom"
+                MDTextField:
+                    id: input_name
+                    pos_hint: {"center_x": .5, "center_y": 0}
+                    size_hint: (0.9, None)
+                    hint_text: "name"
+                    theme_text_color: "Custom"
+                BoxLayout:
+                    id: drop_down_holder
+                MDIconButton:
+                    id: commit_button
+                    icon: "chevron-double-up"
+                    size_hint: (1, 1)
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                    padding: 10
+                    theme_icon_color: "Custom"
+                    icon_color: app.theme_cls.primary_dark
+                    on_release: finances.commit_ticket()
+            BoxLayout:
+                orientation: 'vertical'
+                Widget:
+                MDIconButton:
+                    icon: "minus-circle-outline"
+                    size_hint: (1, 1)
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                    padding: 10
+                    theme_icon_color: "Custom"
+                    icon_color: app.theme_cls.primary_dark
+                    on_release: finances.show_ticket(1)
+                Widget:
