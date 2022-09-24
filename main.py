@@ -1,9 +1,9 @@
 from kivy.core.window import Window
-window_width = 400
-window_height = 900
+window_width = 360
+window_height = 780
 Window.size = (window_width, window_height)
-Window.top = -500
-Window.left = - 1000
+Window.top = 0
+Window.left = 0
 from kivy.graphics import Ellipse, Color
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.widget import Widget
