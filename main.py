@@ -1,27 +1,25 @@
-from kivy.core.window import Window
-window_width = 360
-window_height = 780
-Window.size = (window_width, window_height)
-Window.top = 0
-Window.left = 0
+# from kivy.core.window import Window
+
+# Window.size = (window_width, window_height)
+# Window.top = 0
+# Window.left = 0
 from kivy.graphics import Ellipse, Color
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.widget import Widget
 from kivy.clock import Clock
 from kivymd.app import MDApp
-from kivymd.uix.label import MDLabel
-from kivymd.uix.screen import MDScreen
-from kivymd.uix.button import MDRectangleFlatButton, MDRoundFlatIconButton
-from kivymd.uix.textfield import MDTextField
-from kivymd.uix.boxlayout import MDBoxLayout
+from kivymd.uix.button import MDRectangleFlatButton
 from kivymd.uix.screenmanager import ScreenManager
 from kivymd.uix.floatlayout import MDFloatLayout
 from kivymd.uix.button import MDIconButton
 from kivy.properties import ObjectProperty
 from kivy.animation import Animation
-from datetime import datetime, time, timedelta
+from datetime import datetime
 from functools import partial
 import sqlite3 as sl
+
+window_width = 360
+window_height = 780
 
 item_height = 40
 connection = sl.connect("OrganizerApp.db")
