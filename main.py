@@ -419,7 +419,6 @@ class FinanceTrackerApp(MDApp):
         self.theme_cls.primary_palette = "Pink"
 
     def on_start(self):
-        fill_main_screen_dictionary()
         create_table_balance()
 
 
