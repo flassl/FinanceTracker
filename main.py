@@ -1,7 +1,7 @@
 from kivy.core.window import Window
 window_width = 360
 window_height = 780
-Window.size = (window_width/2, window_height/2)
+Window.size = (window_width, window_height)
 Window.top = 0
 Window.left = 0
 from kivy.graphics import Ellipse, Color
