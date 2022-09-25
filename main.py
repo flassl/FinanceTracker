@@ -1,8 +1,10 @@
-# from kivy.core.window import Window
-
-# Window.size = (window_width, window_height)
-# Window.top = 0
-# Window.left = 0
+from kivy.core.window import Window
+from kivy.metrics import dp
+window_width = dp(360)
+window_height = dp(780)
+Window.size = (window_width, window_height)
+Window.top = 0
+Window.left = 0
 from kivy.graphics import Ellipse, Color
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.widget import Widget
@@ -18,10 +20,9 @@ from datetime import datetime
 from functools import partial
 import sqlite3 as sl
 
-window_width = 360
-window_height = 780
 
-item_height = 40
+
+item_height = dp(40)
 connection = sl.connect("OrganizerApp.db")
 cursor = connection.cursor()
 menu_list = {"align-horizontal-left": "planer",
