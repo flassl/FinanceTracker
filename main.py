@@ -32,8 +32,6 @@ menu_list = {"align-horizontal-left": "planer",
 menu_icon_button_list = []
 menu_showing = False
 
-main_screen_dict = {}
-
 finance_categories_income = ["wage", "gift", "independency", "other"]
 finance_categories_expense = ["groceries", "rent and services", "pleasures", "other"]
 finance_categories_expense_icon_map = {"groceries": "food-apple", "rent and services": "home", "pleasures": "tea",
@@ -94,11 +92,6 @@ def fetch_transactions(is_expense):
     transactions = cursor.fetchall()
     connection.commit()
     return transactions
-
-
-def fill_main_screen_dictionary():
-    app = MDApp.get_running_app()
-    main_screen_dict["finances"] = app.root.ids.finances
 
 
 def switched_screens():
@@ -428,54 +421,6 @@ class FinanceTrackerApp(MDApp):
     def on_start(self):
         fill_main_screen_dictionary()
         create_table_balance()
-
-    def add_menu_items(self, parent):
-        app = MDApp.get_running_app()
-
-        def switch_to_screen(screen_name, *args):
-            global menu_showing
-            if app.root.current != screen_name:
-                app.root.current = screen_name
-
-                if len(menu_icon_button_list) > 0:
-                    for icon_button in menu_icon_button_list:
-                        icon_button.parent.remove_widget(icon_button)
-                    menu_icon_button_list.clear()
-                menu_showing = False
-                self.add_menu_items(main_screen_dict.get(screen_name))
-                switched_screens()
-
-
-        for index, menu_item_icon in enumerate(menu_list.keys()):
-            new_icon_button = MDIconButton(icon=menu_item_icon, padding=10,
-                                           pos=(- 50, window_height - window_height / 8 - (50 + 10) * index),
-                                           theme_icon_color="Custom",
-                                           icon_color=app.theme_cls.primary_dark, md_bg_color=app.theme_cls.bg_dark,
-                                           on_release=partial(switch_to_screen, menu_list.get(menu_item_icon)))
-            menu_icon_button_list.append(new_icon_button)
-            parent.add_widget(new_icon_button)
-
-    def toggle_menu(self):
-        global menu_showing
-
-        def show_animation():
-            for index, icon_button in enumerate(menu_icon_button_list):
-                Animation.stop_all(icon_button, 'x')
-                animation = Animation(pos=(10, icon_button.pos[1]), t='in_cubic', duration=0.3 + index / 5)
-                animation.start(icon_button)
-
-        def hide_animation():
-            for index, icon_button in enumerate(menu_icon_button_list):
-                Animation.stop_all(icon_button, 'x')
-                animation = Animation(pos=(-50, icon_button.pos[1]), t='in_cubic', duration=0.5 - index / 5)
-                animation.start(icon_button)
-
-        if menu_showing:
-            hide_animation()
-            menu_showing = False
-        elif not menu_showing:
-            show_animation()
-            menu_showing = True
 
 
 if __name__ == '__main__':
