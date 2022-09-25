@@ -119,7 +119,6 @@ class Finances(MDFloatLayout):
 
     def _add_widgets(self, dt):
         app = MDApp.get_running_app()
-        app.add_menu_items(self)
         self.balance = fetch_balance()[0]
         self.ids.balance_label.text = str(self.balance)
         self.ids.input_field.bind(pos=self.update_pos)
